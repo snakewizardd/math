@@ -1,0 +1,14 @@
+identity boundary degree = 1.0000 (must be 1)
+radial face push undefined at center = True
+radial agrees with identity on boundary samples = True
+continuous attempt freezes boundary = True
+continuous attempt, fraction of interior still inside = 1.0000
+thin map face rate before = 0.1667
+thin map face rate after = 1.0000
+thin map froze every old face slot = True
+power face rates after nudge: u=1:1.000, u=2:1.000, u=4:1.000, u=8:1.000, u=16:1.000
+ledger (d, params in 32 steps, pins at half, pins if full):
+  (1, np.int64(32), np.float64(16.0), 0.0)
+  (2, np.int64(64), np.float64(32.0), 0.0)
+  (4, np.int64(128), np.float64(64.0), 0.0)
+  (8, np.int64(256), np.float64(128.0), 0.0)
