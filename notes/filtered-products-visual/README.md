@@ -65,3 +65,55 @@ Writes the three figures and `sim_log.txt` next to the script. Needs
 numpy and matplotlib.
 
 Run log from the container pass is in `sim_log.txt`.
+
+## Second pass: restoration and padding
+
+`restoration_padding_sim.py` runs two steps of the paper as written. The
+first pass drew the face push. Run log is in `restoration_padding_log.txt`.
+
+- Boundary restoration (Section 3). The paper does not push `v/|v|`. It
+  pushes `v / max(delta, |v|)`, with `delta` below the `(s+1)`-st largest
+  slot norm. That is continuous at 0, so slots near 0 stay inside.
+  Toy: a 2-torus family, 4 slots in `[-1,1]^2`. Every slot has stable
+  zeros, but no two zeros meet, so a 0.05 move avoids `Z_2`. Result: at
+  least 3 boundary slots everywhere, and every old boundary slot kept
+  bit for bit. Largest neighbour jump halves as the grid doubles. The
+  plain radial push jumps by 2 at every grid size.
+- Padding (Section 4). This is an integer ledger of the proof, not a
+  measurement. It checks `2q_j - 5 > dim W_j` at every step and tracks
+  `jH / (b(B+j))`. Every `dim P` from 10 to 10000 passes. A larger
+  `dim P` only increases `B`, so `a/8` takes more copies. A single pass
+  on `P^u` leaves the stable range once `dim P >= 2tn`. Taking the old
+  output instead of the old parameters is what removes the dimension
+  bound. The `ell` used is the smallest one with `ab >= 16`. The
+  nilpotence cutoff in the batch-vanishing lemma is not computed.
+- The 1/2. A slot of real dimension `t = 2p+1` carries complex rank `p`.
+  The target has to stay below `2pn`. The companion compares a cover
+  rate `d` with `p d / (t+1)`, and `p/(2p+2) -> 1/2`. That is where the
+  half comes from. It does not come from pinning half of the shift
+  parameters.
+
+Corrections to the first pass:
+
+- `thin_map` slot 2 is discontinuous at `cos(theta) = 0`. It jumps from
+  `(1, 0.3, -0.2)` to about `(0, 0.35, 0.2)`. Slots 0 and 1 stay away
+  from 0, so their face push was never at risk. So face rate 1.00 does
+  not test the lemma.
+- `power_rate` takes independent random phases. Face rate 1 for every
+  `u` follows from the slot shape alone. It is not a power effect.
+- The `d/2` pin ledger and `shift_ledger.png` are a picture, not
+  something the paper states. See the 1/2 bullet above.
+- The Remark 5.4 obstruction is a degree argument on `C(t,u)` for every
+  `u`. One failed continuous attempt in `[-1,1]^2` illustrates it but
+  does not prove it.
+
+Run `python3 restoration_padding_sim.py` to write `restoration.png`,
+`padding_ledger.png` and the log.
+
+## Full read-through
+
+`ANALYSIS.md` covers the whole paper, Sections 2 through 5. It goes
+through the pipeline, checks each step, says where the 1/2 really comes
+from, and gives an assessment. `slicing_check.py` checks the
+simplex-slicing lemma from Section 2 numerically. Its log is in
+`slicing_check_log.txt`.
