@@ -1,0 +1,5 @@
+points checked: 5400, (point, alpha) pairs for naturality: 221400
+(i)   max |sum - 1| = 8.88e-16, min coordinate = 0.00e+00
+(ii)  max (#non-vertices / j) = 1.000  (lemma: <= 1)
+(iii) max |alpha_* rho - rho alpha_*| = 4.33e-15
+all claims hold on the sample

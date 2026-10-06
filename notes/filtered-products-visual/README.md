@@ -109,3 +109,11 @@ Corrections to the first pass:
 
 Run `python3 restoration_padding_sim.py` to write `restoration.png`,
 `padding_ledger.png` and the log.
+
+## Full read-through
+
+`ANALYSIS.md` covers the whole paper, Sections 2 through 5. It goes
+through the pipeline, checks each step, says where the 1/2 really comes
+from, and gives an assessment. `slicing_check.py` checks the
+simplex-slicing lemma from Section 2 numerically. Its log is in
+`slicing_check_log.txt`.
